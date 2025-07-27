@@ -1,0 +1,10 @@
+Curls úteis para testes
+
+curl.exe http://localhost:11434/api/generate -H "Content-Type: application/json" -d '{\"model\": \"qwen3:0.6b\", \"prompt\": \"Qual a capital de Brasília?\", \"stream\": false}'
+
+
+curl http://localhost:11434/api/pull -d '{\"model\": \"deepseek-r1:1.5b\"}'
+
+curl http://localhost:11434/api/delete -d '{\"model\": \"gemma3:1b\"}'
+
+curl -X DELETE http://localhost:11434/api/delete -d '{"model": "llama3:13b"}'
