@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ollama-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ollama
+  template:
+    metadata:
+      labels:
+        app: ollama
+    spec:
+      containers:
+      - name: ollama
+        image: ollama/ollama:0.9.6
+        resources:
+          requests:
+            cpu: "1"
+            memory: "1Gi"
+          limits:
+            memory: "2Gi"
+            cpu: "2"
+        ports:
+        - containerPort: 11434
+        volumeMounts:
+        - name: models-volume
+          mountPath: /root/.ollama/models
+      volumes:
+      - name: models-volume
+        persistentVolumeClaim:
+          claimName: ollama-models-pvc
+
+
+# arquivo de deployment do ollama. 
+# Tem informações para um HorizontalPodAutoscaling, Port e 
+# Volume conectado a um PersistentVolume e PersistentVolumeClaim.
+
